@@ -1,35 +1,48 @@
 -- Create Tabel Analisis
-CREATE TABLE kimia_farma.kf_tabel_analisis AS SELECT
-f.transaction_id,
-f.date as dates,
-c.branch_id,
-c.branch_name,
-c.kota,
-c.provinsi,
-c.rating rating_cabang,
-f.customer_name,
-p.product_id,
-p.product_name,
-p.price,
-f.discount_percentage,
-CASE WHEN p.price > 500000 THEN 0.30
-	WHEN p.price > 300000 THEN 0.25
-    WHEN p.price > 100000 THEN 0.20
-    WHEN p.price > 50000 THEN 0.15
-    WHEN p.price <= 50000 THEN 0.10
-END persentase_gross_laba,
-round(p.price * (1 - f.discount_percentage)) net_sales,
-round((p.price * (1 - f.discount_percentage)) *
-(CASE WHEN p.price > 500000 THEN 0.30
-	WHEN p.price > 300000 THEN 0.25
-    WHEN p.price > 100000 THEN 0.20
-    WHEN p.price > 50000 THEN 0.15
-    WHEN p.price <= 50000 THEN 0.10
-END)) net_profit,
-f.rating rating_transaksi
-FROM `kimia_farma.kf_final_transaction` f
-LEFT JOIN `kimia_farma.kf_kantor_cabang` c ON f.branch_id = c.branch_id
-LEFT JOIN `kimia_farma.kf_product` p ON p.product_id = f.product_id;
+CREATE TABLE kimia_farma.kf_tabel_analisis AS
+WITH gross_laba AS
+    (SELECT
+			f.transaction_id,
+			f.date as dates,
+			c.branch_id,
+			c.branch_name,
+			c.kota,
+			c.provinsi,
+			c.rating rating_cabang,
+			f.customer_name,
+			p.product_id,
+			p.product_name,
+			p.price,
+			f.discount_percentage,
+			CASE WHEN p.price > 500000 THEN 0.30
+					WHEN p.price > 300000 THEN 0.25
+					WHEN p.price > 100000 THEN 0.20
+					WHEN p.price > 50000 THEN 0.15
+					WHEN p.price <= 50000 THEN 0.10
+			END persentase_gross_laba,
+			round(p.price * (1 - f.discount_percentage)) net_sales,
+			f.rating rating_transaksi
+    FROM `kimia_farma.kf_final_transaction` f
+    LEFT JOIN `kimia_farma.kf_kantor_cabang` c ON f.branch_id = c.branch_id
+    LEFT JOIN `kimia_farma.kf_product` p ON p.product_id = f.product_id)
+SELECT
+	transaction_id,
+	dates,
+	branch_id,
+	branch_name,
+	kota,
+	provinsi,
+	rating_cabang,
+	customer_name,
+	product_id,
+	product_name,
+	price,
+	discount_percentage,
+	persentase_gross_laba,
+	net_sales,
+	(price * persentase_gross_laba)-(price - net_sales) net_profit,
+	rating_transaksi
+FROM gross_laba;
 
 -- Create Tabel Analisis Inventory
 CREATE TABLE kimia_farma.kf_analisis_inventory AS
