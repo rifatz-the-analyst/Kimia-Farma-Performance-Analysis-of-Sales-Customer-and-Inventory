@@ -155,7 +155,7 @@ Additional investigation is recommended to determine whether limited penetration
 
 Inventory analysis based on average daily unit sales over the most recent three-month period identified stock availability gaps across multiple branches.
 
-A total of 201 product-branch combinations had zero inventory on hand despite generating average daily sales of 3.24 units. Assuming demand remains consistent, these stockouts could result in an estimated gross revenue loss of approximately IDR 707 million over a seven-day period.
+A total of 201 product-branch combinations had zero inventory on hand despite generating average daily sales of 3.24 units. Assuming demand remains consistent, these stockouts could result in an estimated gross revenue loss of approximately IDR 2.3 billion over a seven-day period.
 
 This suggests opportunities to improve inventory allocation and replenishment processes, particularly for products with stable demand patterns.
 
@@ -182,7 +182,7 @@ These findings suggest the presence of a highly engaged customer segment that co
 
 **Finding**
 
-A total of 201 product-branch combinations had zero inventory on hand despite ongoing customer demand. Based on the average daily sales over the past three months, these stockouts could result in an estimated gross revenue loss of approximately **Rp707 million within seven days**.
+A total of 201 product-branch combinations had zero inventory on hand despite ongoing customer demand. Based on the average daily sales over the past three months, these stockouts could result in an estimated gross revenue loss of approximately **IDR 2.3 billion within seven days**.
 
 **Recommendation**
 
@@ -239,4 +239,4 @@ Conduct a market feasibility analysis to identify the causes of low market penet
 <img width="1000" src="https://github.com/rifatz-the-analyst/Image-archieve/blob/4652f0b59b27adb80e8015f7a6efb432beb94e1f/Kimia%20Farma%20Customer.png" />
 
 <p align="center">
-<img width="1000" src="https://github.com/rifatz-the-analyst/Image-archieve/blob/4652f0b59b27adb80e8015f7a6efb432beb94e1f/Kimia%20Farma%20Inventory.png" />
+<img width="1000" src="https://github.com/rifatz-the-analyst/Image-archieve/blob/125ceccd49aba5e337816fbf296a379f65e32c37/Kimia%20Farma%20Inventory.png" />
