@@ -5,6 +5,7 @@
 ### 1.1 Business Context
 
 Kimia Farma retail chain operates branches across multiple provinces in Indonesia and has accumulated transaction data from January 2020 to December 2023. As the business expands, management requires a comprehensive understanding of sales performance, customer behavior, inventory availability, and regional market penetration to support strategic decision-making.
+
 Using historical transaction, product, branch, and inventory data, this project aims to identify opportunities to improve operational efficiency, strengthen customer retention, reduce lost sales caused by stock shortages, and uncover potential markets for future expansion.
 
 ## 1.2 Business Questions
@@ -31,8 +32,11 @@ The analysis was conducted using four relational tables stored in Google BigQuer
 | product |	Product master containing product names, categories, and standard prices |
 | branch |	Branch information including location, branch category, and branch rating |
 | inventory |	Current inventory snapshot showing stock availability for each product at each branch |
+| *demografi | The record of population by province | 
 
 The dataset covers transactions from January 2020 to December 2023.
+
+*is the dataset from Badan Pusat Statistik (external source)
 
 ### 2.1 Data Cleaning & Preparation
 
@@ -93,14 +97,9 @@ The project uses a star-schema design centered around the Transaction table.
    - Branch
    - Inventory
      
-Relationships:
-
-- Product → Transaction (Product ID)
-- Branch → Transaction (Branch ID)
-- Product → Inventory (Product ID)
-- Branch → Inventory (Branch ID)
-
-This model enables integrated analysis across sales, customers, products, branches, and inventory.
+<p align="center">
+<img width="300" src="https://github.com/rifatz-the-analyst/Image-archieve/blob/d31db543d598e8cbde5f02c3a5e1c5332fff14b5/star%20schema.png" />
+<img width="300" src="https://github.com/rifatz-the-analyst/Image-archieve/blob/d31db543d598e8cbde5f02c3a5e1c5332fff14b5/tabel%20analisis.png" />
 
 ## 3. Executive Summary
 
