@@ -1,12 +1,10 @@
-# Kimia Farma Performance Analysis: Sales, Customer, and Inventory
+# Kimia Farma Performance Analysis: Sales and Customer
 
 ## 1. Project Background
 
 ### 1.1 Business Context
 
-Kimia Farma retail chain operates branches across multiple provinces in Indonesia and has accumulated transaction data from January 2020 to December 2023. As the business expands, management requires a comprehensive understanding of sales performance, customer behavior, inventory availability, and regional market penetration to support strategic decision-making.
-
-Using historical transaction, product, branch, and inventory data, this project aims to identify opportunities to improve operational efficiency, strengthen customer retention, reduce lost sales caused by stock shortages, and uncover potential markets for future expansion.
+Kimia Farma retail chain operates branches across multiple provinces in Indonesia and has accumulated transaction data from January 2020 to December 2023. As the business expands, management requires a comprehensive understanding of sales performance, customer behavior, and regional market penetration to support strategic decision-making. Using historical transaction, product, and branch this project aims to identify opportunities to improve operational efficiency, strengthen customer retention, and uncover potential markets for future expansion.
 
 ## 1.2 Business Questions
 
@@ -17,21 +15,19 @@ This analysis addresses the following business questions:
 3.	How do branches and provinces compare in terms of sales performance?
 4.	Are there underserved markets with high expansion potential?
 5.	How effective is the company's customer retention?
-6.	Are current inventory levels sufficient to support customer demand?
-7.	What business actions could improve revenue growth and operational efficiency?
+6.	What business actions could improve revenue growth and operational efficiency?
 
 ## 2. Data Preparation & Data Structure
 
 ### 2.1 Data Sources
 
-The analysis was conducted using four relational tables stored in Google BigQuery.
+The analysis was conducted using relational tables stored in Google BigQuery.
 
 | Table |	Description |
 | --- | --- |
 | final_transaction |	Transaction history including transaction date, branch, customer, product, selling price, discount, and customer rating |
 | product |	Product master containing product names, categories, and standard prices |
 | branch |	Branch information including location, branch category, and branch rating |
-| inventory |	Current inventory snapshot showing stock availability for each product at each branch |
 | *demografi | The record of population by province | 
 
 The dataset covers transactions from January 2020 to December 2023.
@@ -46,10 +42,9 @@ The following preparation steps were performed before analysis:
 - Validated primary and foreign key relationships between tables.
 - Standardized data types for dates, prices, and identifiers.
 - Calculated net sales after discounts.
-- Joined transaction, product, branch, and inventory tables into an analytical dataset.
+- Joined transaction, product, and branch into an analytical dataset.
 - Aggregated sales data by month, branch, province, product, and customer.
 - Calculated customer-level metrics including repeat purchase behavior and returning customer rate.
-- Derived inventory coverage metrics using recent average daily sales.
 
 ### 2.3 Key Metrics
 
@@ -78,13 +73,6 @@ Branch Performance
 - Sales per Million Residents
 - Average Branch Rating
 
-Inventory
-
-- Current Inventory
-- Daily Sales Velocity
-- Inventory Coverage Days
-- Potential Revenue Loss from Stockouts
-
 ### 2.4 Data Model
 
 The project uses a star-schema design centered around the Transaction table.
@@ -95,21 +83,16 @@ The project uses a star-schema design centered around the Transaction table.
 3. Dimension Tables
    - Product
    - Branch
-   - Inventory
-     
-<p align="center">
-<img width="300" src="https://github.com/rifatz-the-analyst/Image-archieve/blob/d31db543d598e8cbde5f02c3a5e1c5332fff14b5/star%20schema.png" />
-<img width="300" src="https://github.com/rifatz-the-analyst/Image-archieve/blob/d31db543d598e8cbde5f02c3a5e1c5332fff14b5/tabel%20analisis.png" />
+   - Demografi
 
 ## 3. Executive Summary
 
 - Analysis of nearly four years of pharmacy retail operations shows a stable business with diversified product sales, improving customer retention, and consistent branch performance. Sales remained relatively stable throughout the analysis period with limited monthly variation, indicating predictable customer demand.
 - Product revenue is well diversified, reducing dependence on any single product category or individual product. At the branch level, sales performance is highly consistent across provinces, suggesting that the company's operating model scales effectively across different markets.
 - Customer retention has strengthened over time, with the returning customer rate increasing from 37.74% in 2021 to 60.57% in 2023. In addition, the top 10% of customers contribute approximately 45% of total revenue, highlighting the importance of retaining high-value customers.
-- Inventory analysis identified operational improvement opportunities. A total of 201 product-branch combinations experienced stockouts despite ongoing demand, representing an estimated Rp2,3 billion in potential gross revenue loss over seven days.
 - Finally, geographic analysis indicates that several densely populated provinces remain underpenetrated despite their large consumer base, while three provinces currently have no branch presence. These findings suggest opportunities for both operational improvements and long-term market expansion.
 
-## 4. Deep Analysis
+## 4. Analysis and Insights
 
 ### 4.1 Sales Growth Remained Stable Throughout 2020–2023
 
@@ -151,21 +134,13 @@ This may indicate untapped market potential and relatively low market penetratio
 
 Additional investigation is recommended to determine whether limited penetration is driven by operational, geographic, regulatory, competitive, or logistical factors.
 
-### 4.5 Inventory Gaps May Lead to Lost Sales Opportunities
-
-Inventory analysis based on average daily unit sales over the most recent three-month period identified stock availability gaps across multiple branches.
-
-A total of 201 product-branch combinations had zero inventory on hand despite generating average daily sales of 3.24 units. Assuming demand remains consistent, these stockouts could result in an estimated gross revenue loss of approximately IDR 2.3 billion over a seven-day period.
-
-This suggests opportunities to improve inventory allocation and replenishment processes, particularly for products with stable demand patterns.
-
-### 4.6 Customer Retention Improved Consistently Between 2021 and 2023
+### 4.5 Customer Retention Improved Consistently Between 2021 and 2023
 
 The company served 264,601 unique customers during the analysis period. Annual active customers remained relatively stable at approximately 105,000–106,000 customers per year. Meanwhile, the returning customer rate increased steadily from 37.74% in 2021 to 51.99% in 2022 and 60.57% in 2023.
 
 The upward trend suggests that customer retention strengthened over time, with a growing share of annual transactions generated by existing customers. This may indicate increasing customer loyalty, improved customer experience, stronger product-market fit, or other retention-related factors that warrant further investigation.
 
-### 4.7 Repeat Customers Represent a Valuable Business Segment
+### 4.6 Repeat Customers Represent a Valuable Business Segment
 
 <p align="center">
 <img width="600" src="https://github.com/rifatz-the-analyst/Image-archieve/blob/2fe5736944bda9f0e0dc00aded9f70050f3d64cc/Customer%20Contributions.png" />
@@ -176,67 +151,52 @@ In addition, 10% of customers contribute 45% of total revenue, and 65 customers 
 
 These findings suggest the presence of a highly engaged customer segment that contributes recurring demand. The company may benefit from targeted retention initiatives, personalized engagement strategies, or loyalty programs designed to strengthen relationships with high-frequency customers.
 
-## Recommendations
+## 5. Recommendations
 
-### 1. Improve Inventory Allocation Across Branches
+### 5.1 Strengthen Customer Retention Through Loyalty Initiatives
 
-**Finding**
+- **Finding**
 
-A total of 201 product-branch combinations had zero inventory on hand despite ongoing customer demand. Based on the average daily sales over the past three months, these stockouts could result in an estimated gross revenue loss of approximately **IDR 2.3 billion within seven days**.
+  The returning customer rate has increased consistently over the past three years. Additionally, the top 10% of customers contribute approximately **45% of total revenue**, indicating that a relatively small customer segment generates a substantial share of sales.
 
-**Recommendation**
+- **Recommendation**
 
-Implement a data-driven inventory reallocation and replenishment process by prioritizing high-demand products with low or zero stock. Redistribute inventory from branches with excess stock to branches experiencing stock shortages, and establish minimum stock thresholds for products with consistent sales demand.
+  Develop a loyalty program targeting high-value and repeat customers by offering personalized rewards, exclusive promotions, or membership benefits. Complement these initiatives with seasonal promotional campaigns during major holidays, year-end periods, or other peak demand periods to encourage repeat purchases.
 
-**Expected Impact**
+- **Expected Impact**
+  
+  - Increase repeat purchase frequency and customer retention.
+  - Improve customer lifetime value (CLV).
+  - Generate additional revenue from existing customers while reducing reliance on new customer acquisition.
 
-* Reduce potential lost sales caused by stockouts.
-* Improve inventory availability across branches.
-* Increase product availability for customers, leading to higher customer satisfaction and a lower risk of losing customers to competitors.
+### 5.2 Expand Market Penetration in Underserved Provinces
 
-### 2. Strengthen Customer Retention Through Loyalty Initiatives
+- **Finding**
 
-**Finding**
+  Several highly populated provinces continue to record relatively low sales per million residents, suggesting untapped market potential. In addition, the company currently has no branch presence in three provinces.
 
-The returning customer rate has increased consistently over the past three years. Additionally, the top 10% of customers contribute approximately **45% of total revenue**, indicating that a relatively small customer segment generates a substantial share of sales.
+- **Recommendation**
 
-**Recommendation**
+  Conduct a market feasibility analysis to identify the causes of low market penetration in densely populated provinces, including branch coverage, competition, accessibility, and local demand. Based on the findings, evaluate opportunities to expand branch networks or strengthen distribution channels, particularly in provinces where the company currently has no physical presence.
 
-Develop a loyalty program targeting high-value and repeat customers by offering personalized rewards, exclusive promotions, or membership benefits. Complement these initiatives with seasonal promotional campaigns during major holidays, year-end periods, or other peak demand periods to encourage repeat purchases.
+- **Expected Impact**
 
-**Expected Impact**
-
-* Increase repeat purchase frequency and customer retention.
-* Improve customer lifetime value (CLV).
-* Generate additional revenue from existing customers while reducing reliance on new customer acquisition.
-
-### 3. Expand Market Penetration in Underserved Provinces
-
-**Finding**
-
-Several highly populated provinces continue to record relatively low sales per million residents, suggesting untapped market potential. In addition, the company currently has no branch presence in three provinces.
-
-**Recommendation**
-
-Conduct a market feasibility analysis to identify the causes of low market penetration in densely populated provinces, including branch coverage, competition, accessibility, and local demand. Based on the findings, evaluate opportunities to expand branch networks or strengthen distribution channels, particularly in provinces where the company currently has no physical presence.
-
-**Expected Impact**
-
-* Increase market penetration in high-potential provinces.
-* Acquire new customers through expanded branch coverage.
-* Improve access to pharmaceutical products across a broader geographic area.
-* Support sustainable long-term revenue growth through geographic expansion.
+  - Increase market penetration in high-potential provinces.
+  - Acquire new customers through expanded branch coverage.
+  - Improve access to pharmaceutical products across a broader geographic area.
+  - Support sustainable long-term revenue growth through geographic expansion.
 
 ## Dashboard Preview
 
-<p align="center">
-<img width="1000" src="https://github.com/rifatz-the-analyst/Image-archieve/blob/4652f0b59b27adb80e8015f7a6efb432beb94e1f/Kimia%20Farma%20Overview.png" />
+https://console.cloud.google.com/bigquery?ws=!1m7!1m6!12m5!1m3!1srakamin-kf-analytics-499711!2sus-central1!3sc74e25be-9c42-4adc-9b44-385caa8dd80f!2e1
+
+https://datastudio.google.com/reporting/61de4a0f-fe44-4c34-91b6-65628edf5a04
 
 <p align="center">
-<img width="1000" src="https://github.com/rifatz-the-analyst/Image-archieve/blob/4652f0b59b27adb80e8015f7a6efb432beb94e1f/Kimia%20Farma%20Product.png" />
+<img width="1000" src="https://github.com/rifatz-the-analyst/Image-archieve/blob/c54fc31d4fae765beb9b48e43e3a389084533680/Kimia%20Farma%20Overview.png" />
 
 <p align="center">
-<img width="1000" src="https://github.com/rifatz-the-analyst/Image-archieve/blob/4652f0b59b27adb80e8015f7a6efb432beb94e1f/Kimia%20Farma%20Customer.png" />
+<img width="1000" src="https://github.com/rifatz-the-analyst/Image-archieve/blob/c54fc31d4fae765beb9b48e43e3a389084533680/Kimia%20Farma%20Product.png" />
 
 <p align="center">
-<img width="1000" src="https://github.com/rifatz-the-analyst/Image-archieve/blob/125ceccd49aba5e337816fbf296a379f65e32c37/Kimia%20Farma%20Inventory.png" />
+<img width="1000" src="https://github.com/rifatz-the-analyst/Image-archieve/blob/c54fc31d4fae765beb9b48e43e3a389084533680/Kimia%20Farma%20Customer.png" />
